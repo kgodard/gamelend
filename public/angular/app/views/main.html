@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="span12">
+    <div ng-include src="'views/partials/topbar.html'" ng-controller="NavigationCtrl"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+    <div ng-include src="'views/partials/messages.html'" ng-controller="MessagesCtrl"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-heading">My Games</div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Title
+          </th>
+          <th>
+            Developer
+          </th>
+          <th>
+            System
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="game in games">
+          <td>
+            {{game.title}}
+          </td>
+          <td>
+            {{game.developer}}
+          </td>
+          <td>
+            {{game.system}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
