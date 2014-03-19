@@ -23,5 +23,8 @@ class WebService
   getGames: ->
     @$http.get(@baseUrl + "games", {headers: @getAuthHeaders()})
 
+  createGame: (game) ->
+    @$http.post(@baseUrl + "games", {game: {title: game.title, system: game.system, developer: game.developer}}, {headers: @getAuthHeaders()})
+
 angular.module "gamelendApp.webService", [], ($provide) ->
   $provide.factory "webService", ["$http", "storageService", ($http, storageService) -> new WebService($http, storageService)]

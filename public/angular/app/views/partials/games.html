@@ -1,0 +1,62 @@
+<div class="row">
+  <div>
+    <div class="well">
+      <form novalidate name="gameForm" class="form-inline" role="form">
+        <div class="form-group" ng-class="{'has-error' : gameForm.title.$invalid && !gameForm.title.$pristine}">
+          <input
+          type="text" class="form-control"
+          ng-model="game.title"
+          placeholder="Game Title"
+          required
+          ng-minlength=2
+          name="title"/>
+          <p ng-show="gameForm.title.$invalid && !gameForm.title.$pristine"
+            class="help-block">A 2-character minimum length title is required.</p>
+        </div>
+        <div class="form-group">
+          <select ng-model="game.system" ng-options="s as s for s in systems" class="form-control" required></select>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="game.developer" placeholder="Developer" />
+        </div>
+        <button ng-click="createGame(game); gameForm.$setPristine()" class="btn btn-default" ng-disabled="gameForm.$invalid || isUnchanged(game)">Save</button>
+        <button ng-click="clearGameAttrs(); gameForm.$setPristine()" class="btn btn-default">Reset</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-heading">My Games</div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th ng-click="sortOrder = 'title'" style="cursor:pointer">
+            Title
+          </th>
+          <th ng-click="sortOrder = 'system'" style="cursor:pointer">
+            System
+          </th>
+          <th ng-click="sortOrder = 'developer'" style="cursor:pointer">
+            Developer
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="savedGame in games | orderBy:sortOrder">
+          <td>
+            {{savedGame.title}}
+          </td>
+          <td>
+            {{savedGame.system}}
+          </td>
+          <td>
+            {{savedGame.developer}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

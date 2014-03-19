@@ -6,7 +6,7 @@ class Api::V1::GamesController < ApplicationController
   end
 
   def create
-    game = current_user.games.new(params[:game])
+    game = current_user.games.new(game_params)
     if game.save
       render :json => game
     else
@@ -19,5 +19,11 @@ class Api::V1::GamesController < ApplicationController
 
   def destroy
 
+  end
+
+  private
+
+  def game_params
+    params.require(:game).permit(:title, :system, :developer)
   end
 end
