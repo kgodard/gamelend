@@ -20,7 +20,7 @@
           <input type="text" class="form-control" ng-model="game.developer" placeholder="Developer" />
         </div>
         <button ng-click="createGame(game); gameForm.$setPristine()" class="btn btn-default" ng-disabled="gameForm.$invalid || isUnchanged(game)">Save</button>
-        <button ng-click="clearGameAttrs(); gameForm.$setPristine()" class="btn btn-default">Reset</button>
+        <button ng-click="clearGameAttrs(); gameForm.$setPristine()" class="btn btn-default" ng-disabled="gameForm.$pristine">Reset</button>
       </form>
     </div>
   </div>
@@ -41,6 +41,7 @@
           <th ng-click="sortOrder = 'developer'" style="cursor:pointer">
             Developer
           </th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,13 @@
           </td>
           <td>
             {{savedGame.developer}}
+          </td>
+          <td>
+            <button
+              ng-confirm-click="deleteGame(savedGame.id)"
+              ng-confirm-message="Really?"
+              ng-confirm-condition="true"
+              class="btn btn-xs btn-danger">Delete</button>
           </td>
         </tr>
       </tbody>

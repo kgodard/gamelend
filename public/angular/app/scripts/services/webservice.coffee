@@ -23,6 +23,9 @@ class WebService
   getGames: ->
     @$http.get(@baseUrl + "games", {headers: @getAuthHeaders()})
 
+  deleteGame: (id) ->
+    @$http.delete(@baseUrl + "games/#{id}", {headers: @getAuthHeaders()})
+
   createGame: (game) ->
     @$http.post(@baseUrl + "games", {game: {title: game.title, system: game.system, developer: game.developer}}, {headers: @getAuthHeaders()})
 

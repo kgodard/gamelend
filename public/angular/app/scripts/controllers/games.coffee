@@ -10,6 +10,7 @@ class GamesCtrl
     @clearGameAttrs()
     @$scope.sortOrder = 'title'
     @$scope.createGame = @createGame
+    @$scope.deleteGame = @deleteGame
     @$scope.clearGameAttrs = @clearGameAttrs
     @$scope.getGames = @getGames
     @$scope.isUnchanged = @isUnchanged
@@ -33,6 +34,13 @@ class GamesCtrl
   createGame: (game) =>
     promise = @webService.createGame(game)
     promise.then @gameCreated, @error
+
+  deleteGame: (id) =>
+    promise = @webService.deleteGame(id)
+    promise.then @gameDeleted, @error
+
+  gameDeleted: =>
+    @getGames()
 
   gameCreated: =>
     @clearGameAttrs()

@@ -8,17 +8,21 @@ class Api::V1::GamesController < ApplicationController
   def create
     game = current_user.games.new(game_params)
     if game.save
-      render :json => game
+      render_json_response :ok
     else
-      render :json => {
-        :success => false,
-        :message => game.errors.full_messages.uniq.to_sentence
-      }, :status => :unprocessable_entity
+      errors = game.errors.full_messages.uniq.to_sentence
+      render_json_response :error, :message => errors
     end
   end
 
   def destroy
+    game = current_user.games.find(params[:id])
 
+    if game.destroy
+      render_json_response :ok
+    else
+      render_json_response :error, :message => 'could not delete game'
+    end
   end
 
   private
