@@ -30,7 +30,12 @@ GEM
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
+    byebug (2.6.0)
+      columnize (~> 0.3)
+      debugger-linecache (~> 1.2)
+    columnize (0.3.6)
     daemons (1.1.9)
+    debugger-linecache (1.2.0)
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -102,6 +107,7 @@ PLATFORMS
 
 DEPENDENCIES
   aes (~> 0.5.0)
+  byebug
   devise
   pundit
   rack-cors

@@ -1,5 +1,4 @@
 Gamelend::Application.routes.draw do
-  resources :games, except: [:new, :edit]
   devise_for :users, :skip => [:sessions, :registrations]
 
   as :user do
@@ -10,7 +9,7 @@ Gamelend::Application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
-      resources :games, :only => [:index, :create, :destroy]
+      resources :games
       get "/greet" => "pages#greet", :as => 'greet'
     end
   end

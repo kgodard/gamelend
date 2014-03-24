@@ -10,9 +10,11 @@ class GamesCtrl
     @clearGameAttrs()
     @$scope.sortOrder = 'title'
     @$scope.createGame = @createGame
+    @$scope.updateGame = @updateGame
     @$scope.deleteGame = @deleteGame
     @$scope.clearGameAttrs = @clearGameAttrs
     @$scope.getGames = @getGames
+    @$scope.getGame = @getGame
     @$scope.isUnchanged = @isUnchanged
     @$scope.systems = [
       'PS3', 'Xbox 360', 'PC',
@@ -24,6 +26,14 @@ class GamesCtrl
   isUnchanged: (game) =>
     angular.equals(game, {})
 
+  getGame: (id) =>
+    promise = @webService.getGame(id)
+    promise.then @loadGame, @error
+
+  loadGame: (result) =>
+    # console.log "#{JSON.stringify(result.data)}"
+    @$scope.game = angular.copy(result.data)
+
   getGames: =>
     games = @webService.getGames()
     games.then @setGames, @error
@@ -33,7 +43,11 @@ class GamesCtrl
 
   createGame: (game) =>
     promise = @webService.createGame(game)
-    promise.then @gameCreated, @error
+    promise.then @gameSaved, @error
+
+  updateGame: (game) =>
+    promise = @webService.updateGame(game)
+    promise.then @gameSaved, @error
 
   deleteGame: (id) =>
     promise = @webService.deleteGame(id)
@@ -42,7 +56,7 @@ class GamesCtrl
   gameDeleted: =>
     @getGames()
 
-  gameCreated: =>
+  gameSaved: =>
     @clearGameAttrs()
     @getGames()
 

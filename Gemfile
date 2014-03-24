@@ -14,6 +14,7 @@ gem 'sqlite3'
 group :development do
   gem 'thin'
   gem 'rack-cors'
+  gem 'byebug'
 end
 
 # To use ActiveModel has_secure_password

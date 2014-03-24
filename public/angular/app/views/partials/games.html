@@ -19,8 +19,10 @@
         <div class="form-group">
           <input type="text" class="form-control" ng-model="game.developer" placeholder="Developer" />
         </div>
-        <button ng-click="createGame(game); gameForm.$setPristine()" class="btn btn-default" ng-disabled="gameForm.$invalid || isUnchanged(game)">Save</button>
+        <button ng-hide="game.id" ng-click="createGame(game); gameForm.$setPristine()" class="btn btn-default" ng-disabled="gameForm.$invalid || isUnchanged(game)">Save</button>
+        <button ng-show="game.id" ng-click="updateGame(game); gameForm.$setPristine()" class="btn btn-default" ng-disabled="gameForm.$invalid">Update</button>
         <button ng-click="clearGameAttrs(); gameForm.$setPristine()" class="btn btn-default" ng-disabled="gameForm.$pristine">Reset</button>
+        <input type="hidden" ng-model="game.id">
       </form>
     </div>
   </div>
@@ -61,6 +63,10 @@
               ng-confirm-message="Really?"
               ng-confirm-condition="true"
               class="btn btn-xs btn-danger">Delete</button>
+
+            <button
+              ng-click="getGame(savedGame.id)"
+              class="btn btn-xs btn-warning">Edit</button>
           </td>
         </tr>
       </tbody>
