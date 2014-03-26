@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :games
+  has_many :lendings, foreign_key: :borrower_id
+  has_many :borrowed_games, through: :lendings, source: :game
 end
