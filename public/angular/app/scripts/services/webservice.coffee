@@ -5,6 +5,9 @@ class WebService
   constructor: (@$http, @storageService) ->
     @baseUrl = "/api/v1/"
 
+  createLending: (lending) ->
+    @$http.post(@baseUrl + "lendings", {lending: {game_id: lending.gameId, borrower_id: lending.borrower.id, return_on: lending.returnOn}}, {headers: @getAuthHeaders()})
+
   signup: (user) ->
     @$http.post(@baseUrl + "signup", {user: {email: user.email, password: user.password, username: user.username}})
 
@@ -19,6 +22,9 @@ class WebService
 
   getGreeting: () ->
     @$http.get(@baseUrl + "greet", {headers: @getAuthHeaders()})
+
+  getUsers: ->
+    @$http.get(@baseUrl + "users", {headers: @getAuthHeaders()})
 
   getGames: ->
     @$http.get(@baseUrl + "games", {headers: @getAuthHeaders()})

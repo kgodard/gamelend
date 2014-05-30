@@ -22,6 +22,12 @@ class ApplicationController < ActionController::API
 
   private
 
+  def handle_success(resource)
+    token = resource.ensure_authentication_token
+    email = AES.encrypt(resource.email, Gamelend::Application.config.secret_key_base)
+    render :json => {:success => true, :email => email, :token => token, :username => resource.username}
+  end
+
   def render_json_response(type, hash={})
     unless [ :ok, :redirect, :error ].include?(type)
       raise "Invalid json response type: #{type}"

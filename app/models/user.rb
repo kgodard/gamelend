@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   has_many :games
   has_many :lendings, foreign_key: :borrower_id
   has_many :borrowed_games, through: :lendings, source: :game
+
+  def lent_games
+    games.select {|g| g.lending.present?}
+  end
 end

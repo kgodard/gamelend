@@ -8,6 +8,7 @@ class GamesCtrl
   setup: ->
     @blankGame = { title: '', system: '', developer: '' }
     @clearGameAttrs()
+    @$scope.showLendingModal = @showLendingModal
     @$scope.sortOrder = 'title'
     @$scope.createGame = @createGame
     @$scope.updateGame = @updateGame
@@ -22,6 +23,10 @@ class GamesCtrl
       'Wii U'
     ]
     @getGames()
+
+  showLendingModal: (gameId) =>
+    $('#lendingModal').modal('show')
+    return true
 
   isUnchanged: (game) =>
     angular.equals(game, {})

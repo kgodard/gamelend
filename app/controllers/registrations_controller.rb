@@ -11,11 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
     # Try to save them
     if resource.save
       sign_in resource
-      #TODO: move this to a helper/module because it's also in
-      #sessionscontroller
-      token = resource.ensure_authentication_token
-      email = AES.encrypt(resource.email, Gamelend::Application.config.secret_key_base)
-      render :json => {:success => true, :email => email, :token => token, :username => resource.username}
+      handle_success(resource)
     else
       render :json => {
         :success => false,

@@ -18,12 +18,4 @@ class SessionsController < Devise::SessionsController
     current_user.logout
     render :json => {:success => true, :message => "logged out"}
   end
-
-  private
-  def handle_success(resource)
-    token = resource.ensure_authentication_token
-    email = AES.encrypt(resource.email, Gamelend::Application.config.secret_key_base)
-    render :json => {:success => true, :email => email, :token => token, :username => resource.username}
-  end
-
 end
