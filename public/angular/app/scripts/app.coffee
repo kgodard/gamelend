@@ -1,6 +1,7 @@
 'use strict'
 
 angular.module('gamelendApp', [
+  'ui.bootstrap',
   'ngCookies',
   'ngResource',
   'ngSanitize',
